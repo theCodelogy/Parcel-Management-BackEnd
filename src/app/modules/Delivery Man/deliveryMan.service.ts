@@ -1,5 +1,10 @@
 import { TDeliveryMan } from "./deliveryMan.interface";
-import DeliveryMan from "./deliveryMan.model";
+
+import { deliveryManSearchableFields } from "./deliveryMan.constant";
+import QueryBuilder from "../../builder/queryBuilder";
+import { DeliveryMan } from "./deliveryMan.model";
+
+
 
 
 const createDeliveryManintoDB = async (payload: TDeliveryMan) => {
@@ -7,12 +12,45 @@ const createDeliveryManintoDB = async (payload: TDeliveryMan) => {
   return newDeliveryMan;
 };
 
-const getAllDeliveryMansFromDB = async () => {
-  const DeliveryMans = await DeliveryMan.find();
-  return DeliveryMans;
+
+const getAllDeliveryMansFromDB = async (query: Record<string, unknown>) => {
+  const DeliveryManQuery = new QueryBuilder(DeliveryMan.find(), query)
+    .search(deliveryManSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await DeliveryManQuery.modelQuery;
+  return result;
 };
+
+
+const getSingleDeliveryMansFromDB = async (id:string) => {
+  const result = await DeliveryMan.findById({_id:id});
+  return result;
+};
+
+// Update delivery man
+const UpdateDeliveryMan = async (
+  id: string,
+  payload: Partial<TDeliveryMan>
+) => {
+  const result = await DeliveryMan.findOneAndUpdate({ _id: id }, payload);
+  return result;
+};
+
+// Get single Delivery Man
+const deleteSingleDeliveryMan = async (id: string) => {
+  const result = await DeliveryMan.deleteOne({ _id: id});
+  return result;
+};
+
 
 export const deliveryManServices = {
   createDeliveryManintoDB,
   getAllDeliveryMansFromDB,
+  getSingleDeliveryMansFromDB,
+  UpdateDeliveryMan,
+  deleteSingleDeliveryMan
 };
