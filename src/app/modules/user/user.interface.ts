@@ -9,6 +9,7 @@ export interface TUser {
   phone: string;       
   address: string;       
   role: "Super Admin"| "Merchant Admin"| "Rider"; 
+  status: "Pending"| "Active"| "Disable";
 }
 
 export interface UserModel extends Model<TUser> {

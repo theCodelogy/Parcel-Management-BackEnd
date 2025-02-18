@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { UserRoutes } from "../modules/user/user.route";
 import { AuthRoutes } from "../modules/auth/auth.rout";
+import { DeliveryManRoutes } from "../modules/Delivery Man/deliveryMan.route";
 
 const router = Router(); // Create a new Router instance
 
@@ -8,6 +9,7 @@ const router = Router(); // Create a new Router instance
 const moduleRoutes = [
   { path: "/user", route:UserRoutes  },
   { path: "/auth", route:AuthRoutes  },
+  { path: "/deliveryMan", route:DeliveryManRoutes},
   // Add more routes as needed
 ];
 

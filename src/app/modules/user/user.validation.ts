@@ -20,6 +20,7 @@ const createUserValidationSchema = z.object({
        message: "Address must not exceed 100 characters" 
       }),
   role: z.enum(["Super Admin", "Merchant Admin", "Rider"]),
+  status: z.enum(["Pending", "Active", "Disable"]),
 });
 
 // user update schema

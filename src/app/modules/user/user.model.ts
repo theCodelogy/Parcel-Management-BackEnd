@@ -6,7 +6,7 @@ import config from '../../config';
 
 
 
-const userSchema = new Schema<TUser,UserModel>({
+export const userSchema = new Schema<TUser,UserModel>({
   name: {
     type: String,
     required: true,
@@ -32,6 +32,10 @@ const userSchema = new Schema<TUser,UserModel>({
     type: String,
     enum: ['Super Admin', 'Merchant Admin', 'Rider'],
   },
+  status: {
+    type: String,
+    enum: ["Pending", "Active", "Disable"],
+  }
 }, { timestamps: true }); 
 
 
