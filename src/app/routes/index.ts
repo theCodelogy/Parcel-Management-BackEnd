@@ -3,6 +3,9 @@ import { SuperAdimnRoutes } from "../modules/superAdmin/superAdmin.route";
 import { AuthRoutes } from "../modules/auth/auth.rout";
 import { DeliveryManRoutes } from "../modules/Delivery Man/deliveryMan.route";
 import { MerchantRoutes } from "../modules/Merchant/Merchant.route";
+import { ParcelRoutes } from "../modules/Parcel/parcel.route";
+import { BranchRoutes } from "../modules/Branch/branch.route";
+import { ToDoRoutes } from "../modules/ToDo/toDo.route";
 
 const router = Router(); // Create a new Router instance
 
@@ -12,7 +15,10 @@ const moduleRoutes = [
   { path: "/auth", route: AuthRoutes },
   { path: "/deliveryMan", route: DeliveryManRoutes },
   { path: "/merchant", route: MerchantRoutes },
-  // Add more routes as needed
+  { path: "/parcel", route: ParcelRoutes },
+  { path: "/branch", route: BranchRoutes },
+  { path: "/toDo", route: ToDoRoutes },
+
 ];
 
 // Add each route to the router
