@@ -1,30 +1,39 @@
 import mongoose, { Schema } from "mongoose";
 import { TParcel } from "./parcel.interface";
 
+const deliveryTypes = ["Same Day", "Next Day", "Sub City", "Outside City"];
+const packagingTypes = ["Poly", "Bubble Poly", "Box", "Box Poly"];
+const priorityTypes = ["Normal", "High"];
+const paymentMethods = ["COD"];
+
 // Mongoose parcel Schema
 const ParcelSchema = new Schema<TParcel>({
-  merchant: { type: Schema.Types.ObjectId, required: true, ref: "Merchant" },
+  TrakingId:{type:String, unique:true, required: true},
+  merchant: { type: String, required: true },
   pickupPoints: { type: String, required: true },
   pickupPhone: { type: String, required: true },
   pickupAddress: { type: String, required: true },
   cashCollection: { type: Number, required: true },
   sellingPrice: { type: Number, required: true },
   invoice: { type: String, required: true },
-  deliveryType: { type: String, enum: ["Same Day", "Next Day", "Sub City", "Outside City"], required: true },
-  category: { type: Number, required: true },
+  deliveryType: { type: String, enum: deliveryTypes, required: true },
+  Weight: { type: Number, required: true },
   customerName: { type: String, required: true },
   customerPhone: { type: String, required: true },
   customerAddress: { type: String, required: true },
   note: { type: String },
-  packaging: { type: String, enum: ["Poly", "Bubble Poly", "Box", "Box Poly"], required: true },
-  priority: { type: String, enum: ["Normal", "High"], required: true },
-  paymentMethod: { type: String, enum: ["COD"], required: true },
+  packaging: { type: String, enum: packagingTypes, required: true },
+  priority: { type: String, enum: priorityTypes, required: true },
+  paymentMethod: { type: String, enum: paymentMethods, required: true },
   deliveryCharge: { type: Number, required: true },
+  liquidORFragile: { type: Number },
   codCharge: { type: Number, required: true },
   totalCharge: { type: Number, required: true },
   vat: { type: Number, required: true },
   netPayable: { type: Number, required: true },
+  advance: { type: Number, required: true },
   currentPayable: { type: Number, required: true },
+  parcelStatus:{ type: [Schema.Types.Mixed], required: true }
 });
 
 // Mongoose parcel model

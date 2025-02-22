@@ -1,5 +1,3 @@
-import mongoose, { Model } from "mongoose";
-
 
 type DeliveryType = "Same Day" | "Next Day" | "Sub City" | "Outside City";
 type PackagingType = "Poly" | "Bubble Poly" | "Box" | "Box Poly";
@@ -7,7 +5,8 @@ type PriorityType = "Normal" | "High";
 type PaymentMethod = "COD";
 
 export type TParcel = {
-  merchant: mongoose.Types.ObjectId;
+  TrakingId:string;
+  merchant: string;
   pickupPoints: string;
   pickupPhone: string;
   pickupAddress: string;
@@ -15,7 +14,7 @@ export type TParcel = {
   sellingPrice: number;
   invoice: string;
   deliveryType: DeliveryType;
-  category: number;
+  Weight: number;
   customerName: string;
   customerPhone: string;
   customerAddress: string;
@@ -24,11 +23,17 @@ export type TParcel = {
   priority: PriorityType;
   paymentMethod: PaymentMethod;
   deliveryCharge: number;
+  liquidORFragile?:number;
   codCharge: number;
   totalCharge: number;
   vat: number;
   netPayable: number;
+  advance:number;
   currentPayable: number;
+  parcelStatus:{
+    currentStatus:string;
+    allStatus:[object];
+  };
 };
 
 

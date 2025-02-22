@@ -1,10 +1,19 @@
 import { TParcel } from "./parcel.interface";
 import QueryBuilder from "../../builder/queryBuilder";
 import { Parcel } from "./parcel.model";
+import { v4 as uuidv4 } from "uuid";
 
 const createParcelintoDB = async (payload: TParcel) => {
-  const result = await Parcel.create(payload);
-  return result;
+  // Generate Tracking Id
+  const TrakingId = `CTE${uuidv4().replace(/\D/g, '').substring(0, 10)}`;
+  console.log(TrakingId);
+
+  const parcel = {
+    ...payload,
+    TrakingId
+  }
+  // const result = await Parcel.create(parcel);
+  // return result;
 };
 
 const getAllParcelFromDB = async (query: Record<string, unknown>) => {

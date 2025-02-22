@@ -64,11 +64,18 @@ const loginUser = async (payload: TLoginUser) => {
   const accessToken = createToken(
     jwtPayload,
     config.jwt_secret as string,
-    config.jwt_expair as string
+    config.jwt_access_expair as string
+  );
+
+  const rfreshToken = createToken(
+    jwtPayload,
+    config.jwt_secret as string,
+    config.jwt_refresh_expair as string
   );
 
   return {
     accessToken,
+    rfreshToken,
     user,
   };
 };

@@ -6,6 +6,9 @@ import { MerchantRoutes } from "../modules/Merchant/Merchant.route";
 import { ParcelRoutes } from "../modules/Parcel/parcel.route";
 import { BranchRoutes } from "../modules/Branch/branch.route";
 import { ToDoRoutes } from "../modules/ToDo/toDo.route";
+import { DeliveryCategoryRoutes } from "../modules/DeliveryCategory/deliveryCategory.route";
+import { DeliveryChargeRoutes } from "../modules/Delivery Charge/deliveryCharge.route";
+import { LiquidFragileRoutes } from "../modules/LiquidFragile/liquidFragile.route";
 
 const router = Router(); // Create a new Router instance
 
@@ -18,6 +21,9 @@ const moduleRoutes = [
   { path: "/parcel", route: ParcelRoutes },
   { path: "/branch", route: BranchRoutes },
   { path: "/toDo", route: ToDoRoutes },
+  { path: "/deliveryCategory", route:DeliveryCategoryRoutes },
+  { path: "/deliveryCharge", route:DeliveryChargeRoutes },
+  { path: "/liquidFragile", route:LiquidFragileRoutes },
 
 ];
 
