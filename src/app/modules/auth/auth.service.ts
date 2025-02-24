@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 import config from "../../config";
-import { TLoginUser } from "./auth.interface";
+import {  TLoginUser } from "./auth.interface";
 import { createToken } from "./auth.utils";
 import AppError from "../../errors/AppError";
 import { SuperAdmin } from "../superAdmin/superAdmin.model";
@@ -80,6 +80,22 @@ const loginUser = async (payload: TLoginUser) => {
   };
 };
 
+const currentUser = async(query:Record<string, unknown>)=>{
+  if(query.role=="Delivery Man"){
+    const user = await DeliveryMan.findOne({email:query.email});
+    return user;
+  }else if(query.role=="Super Admin"){
+    const user = await SuperAdmin.findOne({email:query.email});
+    return user;
+  }else if(query.role=="Merchant"){
+    const user = await Merchant.findOne({email:query.email});
+    return user;
+  }else{
+    throw new AppError(httpStatus.NOT_FOUND, "This user is not found !");
+  }
+}
+
 export const AuthServices = {
   loginUser,
+  currentUser
 };

@@ -10,7 +10,7 @@ const app: Application = express(); // Initialize express app
 // Set up CORS to allow specific origins and headers
 app.use(
   cors({
-    origin: ["http://localhost:3000"], // Allow requests from these origins
+    origin: ["http://localhost:5173"], // Allow requests from these origins
     credentials: true, // Allow credentials (cookies, etc.)
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"], // Allow these HTTP methods
     allowedHeaders: ["Content-Type", "Authorization", "accessToken"], // Allowed headers

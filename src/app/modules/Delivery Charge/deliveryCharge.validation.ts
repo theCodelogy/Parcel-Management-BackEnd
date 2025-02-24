@@ -1,7 +1,7 @@
 import { z } from "zod";
 
  const CreateDeliveryChargeValidation = z.object({
-  category: z.string().min(3),
+  category: z.string().min(1),
   weight: z.number().optional(),
   sameDay: z.number().min(0),
   nextDay: z.number().min(0),
@@ -12,7 +12,7 @@ import { z } from "zod";
 });
 
 const UpdateDeliveryChargeValidation = z.object({
-  category: z.string().min(3).optional(),
+  category: z.string().min(1).optional(),
   weight: z.number().optional(),
   sameDay: z.number().min(0).optional(),
   nextDay: z.number().min(0).optional(),

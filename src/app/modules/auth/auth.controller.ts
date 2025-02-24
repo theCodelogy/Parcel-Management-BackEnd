@@ -23,6 +23,17 @@ const loginUser = catchAsync(async (req, res) => {
   });
 });
 
+const getCurrentUser = catchAsync(async (req, res) => {
+  const result = await AuthServices.currentUser(req.query);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Current user find succesfully',
+    data: result,
+  });
+});
+
 export const AuthControllers = {
   loginUser,
+  getCurrentUser
 };
