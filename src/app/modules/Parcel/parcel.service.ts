@@ -6,14 +6,13 @@ import { v4 as uuidv4 } from "uuid";
 const createParcelintoDB = async (payload: TParcel) => {
   // Generate Tracking Id
   const TrakingId = `CTE${uuidv4().replace(/\D/g, '').substring(0, 10)}`;
-  console.log(TrakingId);
 
   const parcel = {
     ...payload,
     TrakingId
   }
-  // const result = await Parcel.create(parcel);
-  // return result;
+  const result = await Parcel.create(parcel);
+  return result;
 };
 
 const getAllParcelFromDB = async (query: Record<string, unknown>) => {
@@ -32,13 +31,34 @@ const getSingleParcelFromDB = async (id: string) => {
   return result;
 };
 
-// Update Parcel man
+// Update Parcel 
 const UpdateParcel = async (
   id: string,
   payload: Partial<TParcel>
 ) => {
   const result = await Parcel.findOneAndUpdate({ _id: id }, payload);
   return result;
+};
+
+// Update Parcel status update
+const UpdateParcelStatus = async (
+  id: string,
+  payload: Partial<TParcel>
+) => {
+
+const parcel = await Parcel.findOne({ _id: id });
+if(parcel){
+  parcel.parcelStatus = parcel.parcelStatus.map((s) => ({
+    ...s,
+    current:"false",
+  }));
+  parcel.parcelStatus.push(payload);
+  await parcel.save();
+  return parcel;
+}else{
+  return "parcel Not found"
+}
+
 };
 
 // Get single parcel
@@ -53,4 +73,5 @@ export const parcelServices = {
   getSingleParcelFromDB,
   UpdateParcel,
   deleteSingleParcel,
+  UpdateParcelStatus
 };

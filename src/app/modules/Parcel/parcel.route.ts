@@ -34,6 +34,13 @@ router.patch(
   ParcelControllers.updateleParcel,
 );
 
+// Update parcel
+router.put(
+  '/:id',
+  validateRequest(ParcelValidation.UpdateParcelValidation),
+  ParcelControllers.updateleParcelStaus,
+);
+
 // Delete single parcel
 router.delete(
   '/:id',

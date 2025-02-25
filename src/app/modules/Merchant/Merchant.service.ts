@@ -6,7 +6,8 @@ import { Merchant } from "./Merchant.model";
 
 // create Merchant
 const createMerchantintoDB = async (payload: TMerchant) => {
-  const newMerchant = await Merchant.create(payload);
+  const merchant={...payload,role:"Merchant"}
+  const newMerchant = await Merchant.create(merchant);
   return newMerchant;
 };
 // Get all Merchant

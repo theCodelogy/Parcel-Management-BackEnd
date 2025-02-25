@@ -46,6 +46,16 @@ const updateleParcel = catchAsync(async (req, res) => {
   });
 });
 
+const updateleParcelStaus = catchAsync(async (req, res) => {
+  const result = await parcelServices.UpdateParcelStatus(req.params.id,req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: ' Parcel Status Update succesfully',
+    data: result,
+  });
+});
+
 const deleteSingleParcel = catchAsync(async (req, res) => {
   const result = await parcelServices.deleteSingleParcel(req.params.id);
   sendResponse(res, {
@@ -64,5 +74,6 @@ export const ParcelControllers = {
   getAllParcels,
   getSingleParcel,
   updateleParcel,
-  deleteSingleParcel
+  deleteSingleParcel,
+  updateleParcelStaus
 };

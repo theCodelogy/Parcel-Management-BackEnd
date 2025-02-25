@@ -8,7 +8,7 @@ const paymentMethods = ["COD"];
 
 // Mongoose parcel Schema
 const ParcelSchema = new Schema<TParcel>({
-  TrakingId:{type:String, unique:true, required: true},
+  TrakingId: { type: String, unique: true, required: true },
   merchant: { type: String, required: true },
   pickupPoints: { type: String, required: true },
   pickupPhone: { type: String, required: true },
@@ -33,7 +33,7 @@ const ParcelSchema = new Schema<TParcel>({
   netPayable: { type: Number, required: true },
   advance: { type: Number, required: true },
   currentPayable: { type: Number, required: true },
-  parcelStatus:{ type: [Schema.Types.Mixed], required: true }
+  parcelStatus: { type: [Schema.Types.Mixed], required: true },
 });
 
 // Mongoose parcel model
