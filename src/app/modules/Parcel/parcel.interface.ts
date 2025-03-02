@@ -30,7 +30,7 @@ export type TParcel = {
   netPayable: number;
   advance:number;
   currentPayable: number;
-  parcelStatus:[object];
+  parcelStatus:object[];
 };
 
 
