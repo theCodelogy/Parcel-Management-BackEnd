@@ -10,7 +10,11 @@ const app: Application = express(); // Initialize express app
 // Set up CORS to allow specific origins and headers
 app.use(
   cors({
-    origin: ["http://localhost:3000"], // Allow requests from these origins
+    origin: [
+      "http://localhost:5173",
+      "https://parcel-managment.vercel.app",
+      "https://classiccourierbd.com",
+    ],
     credentials: true, // Allow credentials (cookies, etc.)
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"], // Allow these HTTP methods
     allowedHeaders: ["Content-Type", "Authorization", "accessToken"], // Allowed headers
@@ -19,7 +23,6 @@ app.use(
 
 app.use(express.json()); // Parse incoming JSON requests
 app.use(cookieParser()); // Parse cookies from requests
-
 
 app.use("/api/v1", router); // Use routes under /api/v1
 
