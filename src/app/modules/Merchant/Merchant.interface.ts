@@ -25,6 +25,7 @@ export type TMerchant = {
     subCity: number;
     outsideCity: number;
   };
+  createdAt: Date;
 }
 
 

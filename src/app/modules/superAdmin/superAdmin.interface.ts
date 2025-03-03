@@ -9,6 +9,7 @@ export interface TSuperAdmin {
   address: string;
   role: "Super Admin";
   status: "Pending" | "Active" | "Disable";
+  createdAt: Date;
 }
 
 export interface SuperAdminModel extends Model<TSuperAdmin> {

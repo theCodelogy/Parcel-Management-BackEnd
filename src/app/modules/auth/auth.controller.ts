@@ -33,7 +33,18 @@ const getCurrentUser = catchAsync(async (req, res) => {
   });
 });
 
+const getAllUsers = catchAsync(async (req, res) => {
+  const result = await AuthServices.getAllllUsers();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'All Users find succesfully',
+    data: result,
+  });
+});
+
 export const AuthControllers = {
   loginUser,
-  getCurrentUser
+  getCurrentUser,
+  getAllUsers
 };

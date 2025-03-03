@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import { DeliveryManModel, TDeliveryMan } from "./deliveryMan.interface";
 import config from "../../config";
 
-const DeliveryManSchema = new Schema({
+const DeliveryManSchema = new Schema<TDeliveryMan,DeliveryManModel>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   phone: { type: String, required: true, unique: true },
@@ -19,7 +19,9 @@ const DeliveryManSchema = new Schema({
   drivingLicence: { type: String, required: true },
   image: { type: String },
   address: { type: String, required: true },
-});
+},
+{ timestamps: true }
+);
 
 
 // make the plain password to hash password

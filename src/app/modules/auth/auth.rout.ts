@@ -17,4 +17,9 @@ router.get(
   AuthControllers.getCurrentUser
 );
 
+router.get(
+  "/allUser",
+  AuthControllers.getAllUsers
+);
+
 export const AuthRoutes = router;
