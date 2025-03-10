@@ -2,12 +2,13 @@ import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { parcelServices } from './parcel.service';
+import { TUser } from '../auth/auth.interface';
 
 
 
 
 const createParcel = catchAsync(async (req, res) => {
-  const result = await  parcelServices.createParcelintoDB(req.body);
+  const result = await  parcelServices.createParcelintoDB(req.body,req.user as TUser);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -27,7 +28,7 @@ const getAllParcels = catchAsync(async (req, res) => {
 });
 
 const getSingleParcel = catchAsync(async (req, res) => {
-  const result = await parcelServices.getSingleParcelFromDB(req.params.id);
+  const result = await parcelServices.getSingleParcelFromDB(req.params.TrakingId);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -47,7 +48,7 @@ const updateleParcel = catchAsync(async (req, res) => {
 });
 
 const updateleParcelStaus = catchAsync(async (req, res) => {
-  const result = await parcelServices.UpdateParcelStatus(req.params.id,req.body);
+  const result = await parcelServices.UpdateParcelStatus(req.params.id,req.body,req.user as TUser);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import config from "../../config";
 import { TLoginUser } from "./auth.interface";
-import { createToken } from "./auth.utils";
+import { createToken, verifyToken } from "./auth.utils";
 import AppError from "../../errors/AppError";
 import { SuperAdmin } from "../superAdmin/superAdmin.model";
 import { Merchant } from "../Merchant/Merchant.model";
@@ -57,7 +57,9 @@ const loginUser = async (payload: TLoginUser) => {
     email: user.email,
     phone: user.phone,
     role: user.role,
+    name:user.name
   };
+
 
   const accessToken = createToken(
     jwtPayload,
@@ -109,8 +111,48 @@ const getAllllUsers = async () => {
   return allUsers;
 };
 
+const refreshToken = async (token: string) => {
+  // checking if the given token is valid
+  const decoded = verifyToken(token, config.jwt_secret as string);
+
+  const { role, email,name,phone} = decoded;
+
+    // checking if the user is exist
+    const user = await currentUser({role,email});
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
+  }
+    // checking if the user is Disabled
+    if (user?.status === 'Disabled') {
+      throw new AppError(httpStatus.FORBIDDEN, 'This user is Disabled! !');
+    }
+  
+
+    const jwtPayload = {
+      email: user.email,
+      phone: user.phone,
+      role: user.role,
+      name:user.name
+    };
+
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_secret as string,
+    config.jwt_access_expair as string,
+  );
+
+  return {
+    accessToken,
+  };
+};
+
+
 export const AuthServices = {
   loginUser,
   currentUser,
-  getAllllUsers
+  getAllllUsers,
+refreshToken 
+
+  
 };

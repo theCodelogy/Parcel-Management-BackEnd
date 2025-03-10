@@ -33,7 +33,16 @@ class QueryBuilder<T> {
 
     excludeFields.forEach((el) => delete queryObj[el]);
 
-    this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
+     // Convert string-based filters to regex
+  const filterQuery: Record<string, any> = {};
+  for (const key in queryObj) {
+    if (typeof queryObj[key] === 'string') {
+      filterQuery[key] = { $regex: queryObj[key], $options: 'i' }; 
+    } else {
+      filterQuery[key] = queryObj[key]; 
+    }
+  }
+    this.modelQuery = this.modelQuery.find(filterQuery as FilterQuery<T>);
 
     return this;
   }

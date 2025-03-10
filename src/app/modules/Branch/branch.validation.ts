@@ -4,7 +4,7 @@ export const CrateBranchValidation = z.object({
   name: z.string().min(1, "Name is required"),
   phone: z.string().min(10, "Phone must be at least 10 digits"),
   address: z.string().min(1, "Address is required"),
-  status: z.enum(["Active", "Inactive"]),
+  status: z.enum(["Active", "Inactive"]).default("Active"),
 });
 
 export const UpadateBranchValidation = z.object({

@@ -32,5 +32,3 @@ export type TParcel = {
   currentPayable: number;
   parcelStatus:object[];
 };
-
-

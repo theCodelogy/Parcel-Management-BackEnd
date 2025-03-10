@@ -5,6 +5,7 @@ import { AuthServices } from "./auth.service";
 import config from "../../config";
 
 
+
 const loginUser = catchAsync(async (req, res) => {
   const { accessToken, user, rfreshToken} = await AuthServices.loginUser(req.body);
   const token = `Bearer ${accessToken}`;
@@ -43,8 +44,21 @@ const getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
+const refreshToken = catchAsync(async (req, res) => {
+  const { refreshToken } = req.cookies;
+  const result = await AuthServices.refreshToken(refreshToken);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Access token is retrieved succesfully!',
+    data: result,
+  });
+});
+
 export const AuthControllers = {
   loginUser,
   getCurrentUser,
-  getAllUsers
+  getAllUsers,
+  refreshToken
 };

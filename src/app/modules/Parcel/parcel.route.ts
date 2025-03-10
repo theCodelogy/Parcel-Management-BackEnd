@@ -2,6 +2,8 @@ import express from 'express';
 import validateRequest from '../../middlewares/validateRequest';
 import { ParcelValidation } from './parcel.validation';
 import { ParcelControllers } from './parcel.controller';
+import auth from '../../middlewares/auth';
+import { USER_ROLE } from '../auth/auth.constait';
 
 
 
@@ -11,6 +13,7 @@ const router = express.Router();
 // create parcel
 router.post(
   '/',
+  auth(USER_ROLE['Super Admin'],USER_ROLE.Merchant),
   validateRequest(ParcelValidation.CreateParcelValidation),
   ParcelControllers.createParcel,
 );
@@ -37,6 +40,7 @@ router.patch(
 // Update parcel
 router.put(
   '/:id',
+  auth("Delivery Man","Super Admin"),
   validateRequest(ParcelValidation.UpdateParcelValidation),
   ParcelControllers.updateleParcelStaus,
 );
