@@ -6,6 +6,8 @@ const DeliveryCategorySchema = new Schema<TDeliveryCategory>({
   title: { type: String, required: true, unique: true },
   status: { type: String, enum: ["Active", "Inactive"], default: "Active" },
   position: { type: Number, required: true }
-});
+},
+{ timestamps: true }
+);
 
 export const DeliveryCategory = model<TDeliveryCategory>("DeliveryCategory", DeliveryCategorySchema);

@@ -1,15 +1,24 @@
-import { TParcel } from "./parcel.interface";
+import { TParcel} from "./parcel.interface";
 import QueryBuilder from "../../builder/queryBuilder";
 import { Parcel } from "./parcel.model";
 import { v4 as uuidv4 } from "uuid";
+import { TUser } from "../auth/auth.interface";
+import { generateStatus } from "./parcel.utils";
 
-const createParcelintoDB = async (payload: TParcel) => {
+const createParcelintoDB = async (payload: TParcel,user:TUser) => {
+  
   // Generate Tracking Id
-  const TrakingId = `CTE${uuidv4().replace(/\D/g, '').substring(0, 10)}`;
+  const TrakingId = `CQBD${uuidv4().replace(/\D/g, '').substring(0, 10)}`;
+// Generate Status
+  const status = await generateStatus({title:"Parcel Create",user})
+
 
   const parcel = {
     ...payload,
-    TrakingId
+    TrakingId,
+    parcelStatus:[
+      status
+    ]
   }
   const result = await Parcel.create(parcel);
   return result;
@@ -26,8 +35,8 @@ const getAllParcelFromDB = async (query: Record<string, unknown>) => {
   return result;
 };
 
-const getSingleParcelFromDB = async (id: string) => {
-  const result = await Parcel.findById({ _id: id });
+const getSingleParcelFromDB = async (TrakingId: string) => {
+  const result = await Parcel.findById({ TrakingId: TrakingId });
   return result;
 };
 
@@ -40,26 +49,31 @@ const UpdateParcel = async (
   return result;
 };
 
-// Update Parcel status update
 const UpdateParcelStatus = async (
   id: string,
-  payload: Partial<TParcel>
+  payload:any,
+  user: TUser
 ) => {
+  const parcel = await Parcel.findOne({ _id: id });
 
-const parcel = await Parcel.findOne({ _id: id });
-if(parcel){
-  parcel.parcelStatus = parcel.parcelStatus.map((s) => ({
-    ...s,
-    current:"false",
-  }));
-  parcel.parcelStatus.push(payload);
+  if (!parcel) {
+    return "Parcel Not Found";
+  }
+
+  // Generate new status
+  const status = await generateStatus({ ...payload, user });
+
+  if (!status) {
+    throw new Error("Failed to generate a valid status");
+  }
+    parcel.currentStatus = payload?.title;
+
+
+  parcel.parcelStatus.push(status);
   await parcel.save();
   return parcel;
-}else{
-  return "parcel Not found"
-}
-
 };
+
 
 // Get single parcel
 const deleteSingleParcel = async (id: string) => {

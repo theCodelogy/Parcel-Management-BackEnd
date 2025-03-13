@@ -16,6 +16,7 @@ export type TDeliveryMan = {
   drivingLicence: string;
   image?: string;
   address: string;
+  createdAt: Date;
 }
 
 export interface DeliveryManModel extends Model<TDeliveryMan> {
