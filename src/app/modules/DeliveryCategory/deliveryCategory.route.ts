@@ -3,6 +3,7 @@ import express from 'express';
 import validateRequest from '../../middlewares/validateRequest';
 import { DeliveryCategoryValidations } from './deliveryCategory.validation';
 import { DeliveryCategoryControllers } from './deliveryCategory.controller';
+import auth from '../../middlewares/auth';
 
 
 
@@ -12,6 +13,7 @@ const router = express.Router();
 // create Delivery Category
 router.post(
   '/',
+  auth("Super Admin"),
   validateRequest(DeliveryCategoryValidations.CreateDeliveryCategoryValidation),
   DeliveryCategoryControllers.createDeliveryCategory,
 );
@@ -25,6 +27,7 @@ router.get(
 // Update Delivery Category
 router.patch(
   '/:id',
+  auth("Super Admin"),
   validateRequest(DeliveryCategoryValidations.updateDeliveryCategoryValidation),
   DeliveryCategoryControllers.updateDeliveryCategory,
 );
@@ -38,6 +41,7 @@ router.get(
 // delete single Delivery Category
 router.delete(
   '/:id',
+  auth("Super Admin"),
   DeliveryCategoryControllers.deleteSingleDeliveryCategory,
 );
 
