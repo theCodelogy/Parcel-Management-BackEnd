@@ -26,7 +26,6 @@ const CreateParcelValidation = z.object({
   netPayable: z.number(),
   advance: z.number(),
   currentPayable: z.number(),
-  parcelStatus:z.array(z.object({}))
 });
 
 

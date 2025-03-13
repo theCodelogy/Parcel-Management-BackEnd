@@ -33,8 +33,11 @@ const ParcelSchema = new Schema<TParcel>({
   netPayable: { type: Number, required: true },
   advance: { type: Number, required: true },
   currentPayable: { type: Number, required: true },
+  currentStatus:{type:String, default:"Parcel Create"},
   parcelStatus: { type: [Schema.Types.Mixed], required: true },
-});
+},
+{ timestamps: true }
+);
 
 // Mongoose parcel model
 export const Parcel = mongoose.model<TParcel>("Parcel", ParcelSchema);

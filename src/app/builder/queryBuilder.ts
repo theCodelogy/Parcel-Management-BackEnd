@@ -1,5 +1,6 @@
 import { FilterQuery, Query } from 'mongoose';
 
+
 class QueryBuilder<T> {
   public modelQuery: Query<T[], T>;
   public query: Record<string, unknown>;
@@ -36,9 +37,12 @@ class QueryBuilder<T> {
      // Convert string-based filters to regex
   const filterQuery: Record<string, any> = {};
   for (const key in queryObj) {
-    if (typeof queryObj[key] === 'string') {
+    if (typeof queryObj[key] === 'string'&&key!=="advance") {
       filterQuery[key] = { $regex: queryObj[key], $options: 'i' }; 
-    } else {
+    } else if(key==="advance"){
+      filterQuery[key] = { $gt: Number(queryObj[key]) }
+    }
+    else {
       filterQuery[key] = queryObj[key]; 
     }
   }

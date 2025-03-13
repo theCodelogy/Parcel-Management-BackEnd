@@ -11,6 +11,7 @@ const DeliveryChargeSchema = new Schema<TDeliveryCharge>({
   outsideCity: { type: Number, required: true },
   status: { type: String, enum: ["Active", "Inactive"], default: "Active" },
   position: { type: Number, required: true }
-});
+},
+{ timestamps: true });
 
 export const DeliveryCharge = model<TDeliveryCharge>("DeliveryCharge", DeliveryChargeSchema);

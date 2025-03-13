@@ -11,7 +11,7 @@ const createParcelintoDB = async (payload: TParcel,user:TUser) => {
   const TrakingId = `CQBD${uuidv4().replace(/\D/g, '').substring(0, 10)}`;
 // Generate Status
   const status = await generateStatus({title:"Parcel Create",user})
-  console.log(status);
+
 
   const parcel = {
     ...payload,
@@ -66,11 +66,7 @@ const UpdateParcelStatus = async (
   if (!status) {
     throw new Error("Failed to generate a valid status");
   }
-    // Mark all previous statuses as not current
-    parcel.parcelStatus = parcel.parcelStatus.map((s) => ({
-      ...s,
-      current: "false",
-    }));
+    parcel.currentStatus = payload?.title;
 
 
   parcel.parcelStatus.push(status);

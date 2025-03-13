@@ -19,7 +19,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
   if (payload.title == "Parcel Create") {
     return {
       title: payload?.title,
-      current: "true",
       ...payload.user,
       date: Date.now(),
     };
@@ -29,7 +28,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
     });
     return {
       title: payload?.title,
-      current: "true",
       pickupMan: pickupMan?.name,
       pickupManPhone: pickupMan?.phone,
       pickupManEmail: pickupMan?.email,
@@ -45,7 +43,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
     });
     return {
       title: payload?.title,
-      current: "true",
       pickupMan: pickupMan?.name,
       pickupManPhone: pickupMan?.phone,
       pickupManEmail: pickupMan?.email,
@@ -61,7 +58,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
     });
     return {
       title: payload?.title,
-      current: "true",
       pickupMan: pickupMan?.name,
       pickupManPhone: pickupMan?.phone,
       pickupManEmail: pickupMan?.email,
@@ -87,7 +83,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
 
     return {
       title: payload?.title,
-      current: "true",
       deliveryMan: deliveryMan?.name,
       deliveryManPhone: deliveryMan?.phone,
       deliveryManEmail: deliveryMan?.email,
@@ -102,7 +97,7 @@ export const generateStatus = async <T extends Record<string, unknown>>(
 
     return {
       title: payload?.title,
-      current: "true",
+
       hubName: Hub?.name,
       mobile: Hub?.phone,
       address: Hub?.address,
@@ -117,7 +112,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
 
     return {
       title: payload?.title,
-      current: "true",
       hubName: Hub?.name,
       mobile: Hub?.phone,
       address: Hub?.address,
@@ -132,7 +126,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
 
     return {
       title: payload?.title,
-      current: "true",
       hubName: Hub?.name,
       mobile: Hub?.phone,
       address: Hub?.address,
@@ -145,7 +138,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
   } else if (payload.title == "Return to Courier") {
     return {
       title: payload?.title,
-      current: "true",
       note: payload.statusDetails?.note,
       createdBy: {
         ...payload.user,
@@ -155,7 +147,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
   } else if (payload.title == "Partial Delivered") {
     return {
       title: payload?.title,
-      current: "true",
       note: payload.statusDetails?.note,
       createdBy: {
         ...payload.user,
@@ -165,7 +156,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
   } else if (payload.title == "Delivered") {
     return {
       title: payload?.title,
-      current: "true",
       note: payload.statusDetails?.note,
       createdBy: {
         ...payload.user,
@@ -179,7 +169,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
 
     return {
       title: payload?.title,
-      current: "true",
       deliveryMan: merchant?.name,
       deliveryManPhone: merchant?.phone,
       deliveryManEmail: merchant?.email,
@@ -192,7 +181,6 @@ export const generateStatus = async <T extends Record<string, unknown>>(
   } else if (payload.title == "Return received by merchant") {
     return {
       title: payload?.title,
-      current: "true",
       note: payload.statusDetails?.note,
       createdBy: {
         ...payload.user,

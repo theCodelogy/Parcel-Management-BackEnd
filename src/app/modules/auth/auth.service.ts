@@ -57,9 +57,8 @@ const loginUser = async (payload: TLoginUser) => {
     email: user.email,
     phone: user.phone,
     role: user.role,
-    name:user.name
+    name: user.name,
   };
-
 
   const accessToken = createToken(
     jwtPayload,
@@ -102,9 +101,7 @@ const getAllllUsers = async () => {
     DeliveryMan.find(),
   ]);
 
-  const allUsers = [
-    ...superAdmins,...merchants, ...deliveryMen
-  ];
+  const allUsers = [...superAdmins, ...merchants, ...deliveryMen];
 
   // Sort the all user
   allUsers.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
@@ -112,47 +109,55 @@ const getAllllUsers = async () => {
 };
 
 const refreshToken = async (token: string) => {
-  // checking if the given token is valid
-  const decoded = verifyToken(token, config.jwt_secret as string);
 
-  const { role, email,name,phone} = decoded;
+  // checking if the token is missing
+  if (!token) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
+  }
 
-    // checking if the user is exist
-    const user = await currentUser({role,email});
+  let decoded;
+  try {
+    // checking if the given token is valid
+    decoded = verifyToken(token, config.jwt_secret as string);
+  } catch (err) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
+  }
+
+  const { role, email, name, phone } = decoded;
+
+  // checking if the user is exist
+  const user = await currentUser({ role, email });
 
   if (!user) {
-    throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
+    throw new AppError(httpStatus.NOT_FOUND, "This user is not found !");
   }
-    // checking if the user is Disabled
-    if (user?.status === 'Disabled') {
-      throw new AppError(httpStatus.FORBIDDEN, 'This user is Disabled! !');
-    }
-  
+  // checking if the user is Disabled
+  if (user?.status === "Disabled") {
+    throw new AppError(httpStatus.FORBIDDEN, "This user is Disabled! !");
+  }
 
-    const jwtPayload = {
-      email: user.email,
-      phone: user.phone,
-      role: user.role,
-      name:user.name
-    };
+  const jwtPayload = {
+    email: user.email,
+    phone: user.phone,
+    role: user.role,
+    name: user.name,
+  };
 
   const accessToken = createToken(
     jwtPayload,
     config.jwt_secret as string,
-    config.jwt_access_expair as string,
+    config.jwt_access_expair as string
   );
 
+
   return {
-    accessToken,
+    accessToken: `Bearer ${accessToken}`,
   };
 };
-
 
 export const AuthServices = {
   loginUser,
   currentUser,
   getAllllUsers,
-refreshToken 
-
-  
+  refreshToken,
 };

@@ -2,6 +2,7 @@ import express from 'express';
 import validateRequest from '../../middlewares/validateRequest';
 import { MerchantValidation } from './Merchant.validation';
 import { MerchantControllers } from './Merchant.controller';
+import auth from '../../middlewares/auth';
 
 
 
@@ -18,6 +19,7 @@ router.post(
 // Get all Merchant
 router.get(
   '/',
+  auth("Super Admin"),
   MerchantControllers.getAllMerchant,
 );
 
