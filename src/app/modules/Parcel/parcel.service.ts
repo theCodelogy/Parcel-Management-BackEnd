@@ -36,7 +36,7 @@ const getAllParcelFromDB = async (query: Record<string, unknown>) => {
 };
 
 const getSingleParcelFromDB = async (TrakingId: string) => {
-  const result = await Parcel.findById({ TrakingId: TrakingId });
+  const result = await Parcel.findOne({ TrakingId:TrakingId });
   return result;
 };
 
@@ -75,7 +75,7 @@ const UpdateParcelStatus = async (
 };
 
 
-// Get single parcel
+// delete single parcel
 const deleteSingleParcel = async (id: string) => {
   const result = await Parcel.deleteOne({ _id: id });
   return result;
