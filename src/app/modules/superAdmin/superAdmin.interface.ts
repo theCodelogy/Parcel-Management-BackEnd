@@ -8,7 +8,7 @@ export interface TSuperAdmin {
   phone: string;
   address: string;
   role: "Super Admin";
-  status: "Pending" | "Active" | "Disable";
+  status: "Pending" | "Active" | "Disabled";
   createdAt: Date;
 }
 

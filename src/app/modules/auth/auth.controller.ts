@@ -25,7 +25,7 @@ const loginUser = catchAsync(async (req, res) => {
 });
 
 const getCurrentUser = catchAsync(async (req, res) => {
-  const result = await AuthServices.currentUser(req.query);
+  const result = await AuthServices.currentUser(req.query.email as string);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

@@ -60,13 +60,7 @@ superAdminSchema.post("save", function (doc, next) {
 
 // Is admin exist checking static meathod
 superAdminSchema.statics.userExists = async function (paylod: string) {
-  const user = await SuperAdmin.findOne({ email: paylod }).select("+password");
-
-  if (user) {
-    return user;
-  } else {
-    return await SuperAdmin.findOne({ phone: paylod }).select("+password");
-  }
+    return await SuperAdmin.findOne({ email: paylod }).select("+password");
 };
 
 // password validation static meathod

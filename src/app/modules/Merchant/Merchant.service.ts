@@ -1,13 +1,18 @@
 import QueryBuilder from "../../builder/queryBuilder";
+import AppError from "../../errors/AppError";
+import { AuthServices } from "../auth/auth.service";
 import { merchantSearchableFields } from "./Merchant.constant";
 import { TMerchant } from "./Merchant.interface";
 import { Merchant } from "./Merchant.model";
-
+import httpStatus from "http-status";
 
 // create Merchant
 const createMerchantintoDB = async (payload: TMerchant) => {
-  const merchant={...payload,role:"Merchant"}
-  const newMerchant = await Merchant.create(merchant);
+  const user = await AuthServices.currentUser(payload.email)
+  if(user){
+    throw new AppError(httpStatus.BAD_REQUEST, "This Email is Already Exist!");
+  }
+  const newMerchant = await Merchant.create(payload);
   return newMerchant;
 };
 // Get all Merchant

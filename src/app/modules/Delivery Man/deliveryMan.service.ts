@@ -1,13 +1,19 @@
 import { TDeliveryMan } from "./deliveryMan.interface";
-
+import httpStatus from "http-status";
 import { deliveryManSearchableFields } from "./deliveryMan.constant";
 import QueryBuilder from "../../builder/queryBuilder";
 import { DeliveryMan } from "./deliveryMan.model";
+import { AuthServices } from "../auth/auth.service";
+import AppError from "../../errors/AppError";
 
 
 
 
 const createDeliveryManintoDB = async (payload: TDeliveryMan) => {
+  const user = await AuthServices.currentUser(payload.email)
+  if(user){
+    throw new AppError(httpStatus.BAD_REQUEST, "This Email is Already Exist!");
+  }
   const newDeliveryMan = await DeliveryMan.create(payload);
   return newDeliveryMan;
 };
