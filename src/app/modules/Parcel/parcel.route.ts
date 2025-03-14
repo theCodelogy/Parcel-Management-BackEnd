@@ -13,7 +13,7 @@ const router = express.Router();
 // create parcel
 router.post(
   '/',
-  auth(USER_ROLE['Super Admin'],USER_ROLE.Merchant),
+  // auth(USER_ROLE['Super Admin'],USER_ROLE.Merchant),
   validateRequest(ParcelValidation.CreateParcelValidation),
   ParcelControllers.createParcel,
 );
@@ -21,6 +21,7 @@ router.post(
 // Get all parcel
 router.get(
   '/',
+  // auth("Super Admin","Delivery Man","Merchant"),
   ParcelControllers.getAllParcels,
 );
 
@@ -33,14 +34,15 @@ router.get(
 // Update parcel
 router.patch(
   '/:id',
+  // auth("Super Admin","Merchant"),
   validateRequest(ParcelValidation.UpdateParcelValidation),
   ParcelControllers.updateleParcel,
 );
 
-// Update parcel
+// Update parcel status
 router.put(
   '/:id',
-  auth("Delivery Man","Super Admin"),
+  // auth("Delivery Man","Super Admin"),
   validateRequest(ParcelValidation.UpdateParcelValidation),
   ParcelControllers.updateleParcelStaus,
 );
@@ -48,6 +50,7 @@ router.put(
 // Delete single parcel
 router.delete(
   '/:id',
+  // auth("Super Admin"),
   ParcelControllers.deleteSingleParcel,
 );
 

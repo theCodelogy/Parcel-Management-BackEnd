@@ -12,6 +12,7 @@ router.post(
 );
 
 // Get all users
-router.get("/", SuperAdminControllers.getAllSuperAdmin);
+router.get("/", 
+  SuperAdminControllers.getAllSuperAdmin);
 
 export const SuperAdimnRoutes = router;

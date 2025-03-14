@@ -19,13 +19,14 @@ router.post(
 // Get all Merchant
 router.get(
   '/',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   MerchantControllers.getAllMerchant,
 );
 
-// Get all Merchant
+// update single Merchant
 router.patch(
   '/:id',
+  // auth("Super Admin","Merchant"),
   validateRequest(MerchantValidation.UpdateMerchantValidation),
   MerchantControllers.updateMerchant,
 );
@@ -33,12 +34,14 @@ router.patch(
 // Get single Merchant
 router.get(
   '/:id',
+  // auth("Super Admin","Merchant"),
   MerchantControllers.getSingleMerchant,
 );
 
 // delete single Merchant
 router.delete(
   '/:id',
+  // auth("Super Admin"),
   MerchantControllers.deleteSingleMerchant,
 );
 
