@@ -1,23 +1,17 @@
 {
-    "version": 2,
-    "builds": [
+  "version": 2,
+  "builds": [
       {
-        "src": "dist/server.js",
-        "use": "@vercel/node"
+          "src": "dist/server.js",
+          "use": "@vercel/node"
       }
-    ],
-    "routes": [
+  ],
+  "routes": [
       {
-        "src": "/(.*)",
-        "dest": "dist/server.js",
-        "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-        "headers": {
-          "Access-Control-Allow-Origin": "http://localhost:5173",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization, accessToken",
-          "Access-Control-Allow-Credentials": "true"
-        }
+          "src": "/(.*)",
+          "dest": "dist/server.js",
+          "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
       }
-    ]
-  }
-  
+  ]
+}
+
