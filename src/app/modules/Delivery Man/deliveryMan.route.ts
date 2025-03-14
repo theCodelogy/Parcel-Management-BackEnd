@@ -18,21 +18,21 @@ router.post(
 // Get all Delivery Man
 router.get(
   '/',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   DeliveryManControllers.getAllDeliveryMans,
 );
 
 // Get single Delivery Man
 router.get(
   '/:id',
-  auth("Super Admin","Delivery Man"),
+  // auth("Super Admin","Delivery Man"),
   DeliveryManControllers.getSingleDeliveryMan,
 );
 
 // Update Delivery Man
 router.patch(
   '/:id',
-  auth("Super Admin","Delivery Man"),
+  // auth("Super Admin","Delivery Man"),
   validateRequest(DeliveryManValidation.UpdateDeliveryManValidation),
   DeliveryManControllers.updateleDeliveryMan,
 );
@@ -40,7 +40,7 @@ router.patch(
 // Delete single Delivery Man
 router.delete(
   '/:id',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   DeliveryManControllers.deleteSingleDeliveryMan,
 );
 

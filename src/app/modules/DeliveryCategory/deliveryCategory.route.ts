@@ -13,7 +13,7 @@ const router = express.Router();
 // create Delivery Category
 router.post(
   '/',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   validateRequest(DeliveryCategoryValidations.CreateDeliveryCategoryValidation),
   DeliveryCategoryControllers.createDeliveryCategory,
 );
@@ -27,7 +27,7 @@ router.get(
 // Update Delivery Category
 router.patch(
   '/:id',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   validateRequest(DeliveryCategoryValidations.updateDeliveryCategoryValidation),
   DeliveryCategoryControllers.updateDeliveryCategory,
 );
@@ -41,7 +41,7 @@ router.get(
 // delete single Delivery Category
 router.delete(
   '/:id',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   DeliveryCategoryControllers.deleteSingleDeliveryCategory,
 );
 

@@ -13,7 +13,7 @@ const router = express.Router();
 // create LiquidFragile
 router.post(
   '/',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   validateRequest(LiquidFragileValidations.CrateliquidFragileValidation),
   LiquidFragileControllers.createLiquidFragile,
 );
@@ -27,7 +27,7 @@ router.get(
 // Update single LiquidFragile
 router.patch(
   '/:id',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   validateRequest(LiquidFragileValidations.updateliquidFragileValidation),
   LiquidFragileControllers.updateLiquidFragile,
 );
@@ -41,7 +41,7 @@ router.get(
 // delete single LiquidFragile
 router.delete(
   '/:id',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   LiquidFragileControllers.deleteSingleLiquidFragile,
 );
 

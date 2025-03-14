@@ -12,7 +12,7 @@ const router = express.Router();
 // create Branch
 router.post(
   '/',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   validateRequest(BarnchValidations.CrateBranchValidation),
   BranchControllers.createBranch,
 );
@@ -26,7 +26,7 @@ router.get(
 // Update single Branch
 router.patch(
   '/:id',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   validateRequest(BarnchValidations.UpadateBranchValidation),
   BranchControllers.updateBranch,
 );
@@ -40,7 +40,7 @@ router.get(
 // delete single Branch
 router.delete(
   '/:id',
-  auth("Super Admin"),
+  // auth("Super Admin"),
   BranchControllers.deleteSingleBranch,
 );
 

@@ -21,7 +21,7 @@ router.get(
 
 router.get(
   "/allUser",
-  auth(USER_ROLE["Super Admin"]),
+  // auth(USER_ROLE["Super Admin"]),
   AuthControllers.getAllUsers
 );
 
