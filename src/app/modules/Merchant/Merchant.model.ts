@@ -21,7 +21,6 @@ const MerchantSchema = new Schema<TMerchant>(
       type: String,
       enum: ["Pending", "Active", "Disabled"],
       default:"Pending",
-      required:true,
     },
     tradeLicense: { type: String, required: true },
     image: { type: String },
@@ -61,15 +60,9 @@ MerchantSchema.post("save", function (doc, next) {
 
 // Is merchant exist checking static meathod
 MerchantSchema.statics.isMerchantExists = async function (paylod: string) {
-  const merchant = await Merchant.findOne({ email: paylod }).select(
-    "+password"
-  );
-
-  if (merchant) {
-    return merchant;
-  } else {
-    return await Merchant.findOne({ phone: paylod }).select("+password");
-  }
+    return await Merchant.findOne({ email: paylod }).select(
+      "+password"
+    );
 };
 
 // password validation static meathod

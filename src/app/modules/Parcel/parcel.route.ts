@@ -27,7 +27,7 @@ router.get(
 
 // Get single parcel
 router.get(
-  '/:id',
+  '/:TrakingId',
   ParcelControllers.getSingleParcel,
 );
 

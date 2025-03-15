@@ -52,6 +52,15 @@ const loginUser = async (payload: TLoginUser) => {
     throw new AppError(httpStatus.NOT_FOUND, "This user is not found !");
   }
 
+  if (user.status === "Pending") {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Please wait for admin approvel!"
+    );
+  } else if (user.status === "Disabled") {
+    throw new AppError(httpStatus.BAD_REQUEST, "Your account is now disable!");
+  }
+
   //create token and sent to the  client
   const jwtPayload = {
     email: user.email,
@@ -79,19 +88,18 @@ const loginUser = async (payload: TLoginUser) => {
   };
 };
 
-const currentUser = async (query: Record<string, unknown>) => {
-  if (query.role == "Delivery Man") {
-    const user = await DeliveryMan.findOne({ email: query.email });
-    return user;
-  } else if (query.role == "Super Admin") {
-    const user = await SuperAdmin.findOne({ email: query.email });
-    return user;
-  } else if (query.role == "Merchant") {
-    const user = await Merchant.findOne({ email: query.email });
-    return user;
-  } else {
-    throw new AppError(httpStatus.NOT_FOUND, "This user is not found !");
+const currentUser = async (email: String) => {
+  let user;
+  if (!user) {
+    user = await DeliveryMan.findOne({ email });
   }
+  if (!user) {
+    user = await SuperAdmin.findOne({ email });
+  }
+  if (!user) {
+    user = await Merchant.findOne({ email });
+  }
+  return user;
 };
 
 const getAllllUsers = async () => {
@@ -109,7 +117,6 @@ const getAllllUsers = async () => {
 };
 
 const refreshToken = async (token: string) => {
-
   // checking if the token is missing
   if (!token) {
     throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
@@ -126,7 +133,7 @@ const refreshToken = async (token: string) => {
   const { role, email, name, phone } = decoded;
 
   // checking if the user is exist
-  const user = await currentUser({ role, email });
+  const user = await currentUser(email);
 
   if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, "This user is not found !");
@@ -148,7 +155,6 @@ const refreshToken = async (token: string) => {
     config.jwt_secret as string,
     config.jwt_access_expair as string
   );
-
 
   return {
     accessToken: `Bearer ${accessToken}`,

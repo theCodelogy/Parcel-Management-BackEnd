@@ -14,7 +14,7 @@ const DeliveryManSchema = new Schema<TDeliveryMan,DeliveryManModel>({
   openingBalance: { type: Number, required: true },
   password: { type: String, required: true },
   salary: { type: Number, required: true },
-  status: { type: String, enum: ["Pending", "Active", "Disabled"],default:"Pending", required: true },
+  status: { type: String, enum: ["Pending", "Active", "Disabled"],default:"Pending" },
   hub: { type: String, required: true },
   drivingLicence: { type: String, required: true },
   image: { type: String },
@@ -44,13 +44,7 @@ DeliveryManSchema.post("save", function (doc, next) {
 
 // Is Delibery Man exist checking static meathod
 DeliveryManSchema.statics.isDeliveryManExists = async function (paylod: string) {
-  const merchant = await DeliveryMan.findOne({ email: paylod }).select("+password");
-
-  if (merchant) {
-    return merchant;
-  } else {
-    return await DeliveryMan.findOne({ phone: paylod }).select("+password");
-  }
+  return await DeliveryMan.findOne({ email: paylod }).select("+password");
 };
 
 // password validation static meathod
