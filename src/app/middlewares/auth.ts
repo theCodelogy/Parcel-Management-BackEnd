@@ -27,7 +27,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
     const { role, email, name, phone } = decoded;
 
     // checking if the user is exist
-    const user = await AuthServices.currentUser({ role, email });
+    const user = await AuthServices.currentUser(email);
 
     if (!user) {
       throw new AppError(httpStatus.NOT_FOUND, "This user is not found !");
