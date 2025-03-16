@@ -6,6 +6,7 @@ import AppError from "../../errors/AppError";
 import { SuperAdmin } from "../superAdmin/superAdmin.model";
 import { Merchant } from "../Merchant/Merchant.model";
 import { DeliveryMan } from "../Delivery Man/deliveryMan.model";
+import { Branch } from "../Branch/branch.model";
 
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
@@ -15,6 +16,7 @@ const loginUser = async (payload: TLoginUser) => {
   const deliveryMan = await DeliveryMan.isDeliveryManExists(
     payload.emailORphone
   );
+  const branch = await Branch.isBranchExists(payload.emailORphone);
 
   // Check is password valid or not
   if (superAdmin) {
@@ -45,6 +47,17 @@ const loginUser = async (payload: TLoginUser) => {
       )
     ) {
       user = deliveryMan;
+    } else {
+      throw new AppError(httpStatus.FORBIDDEN, "Password do not matched");
+    }
+  } else if (branch) {
+    if (
+      await Branch.isPasswordMatched(
+        payload?.password,
+        branch?.password
+      )
+    ) {
+      user = branch;
     } else {
       throw new AppError(httpStatus.FORBIDDEN, "Password do not matched");
     }
@@ -99,17 +112,21 @@ const currentUser = async (email: String) => {
   if (!user) {
     user = await Merchant.findOne({ email });
   }
+  if (!user) {
+    user = await Branch.findOne({ email });
+  }
   return user;
 };
 
 const getAllllUsers = async () => {
-  const [superAdmins, merchants, deliveryMen] = await Promise.all([
+  const [superAdmins, merchants, deliveryMen,branches] = await Promise.all([
     SuperAdmin.find(),
     Merchant.find(),
     DeliveryMan.find(),
+    Branch.find(),
   ]);
 
-  const allUsers = [...superAdmins, ...merchants, ...deliveryMen];
+  const allUsers = [...superAdmins, ...merchants, ...deliveryMen,...branches];
 
   // Sort the all user
   allUsers.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
@@ -130,7 +147,7 @@ const refreshToken = async (token: string) => {
     throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
   }
 
-  const { role, email, name, phone } = decoded;
+  const { email} = decoded;
 
   // checking if the user is exist
   const user = await currentUser(email);

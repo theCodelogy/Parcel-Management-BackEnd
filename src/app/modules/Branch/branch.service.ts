@@ -1,9 +1,17 @@
 import QueryBuilder from "../../builder/queryBuilder";
+import AppError from "../../errors/AppError";
+import { AuthServices } from "../auth/auth.service";
 import { TBranch } from "./branch.interface";
 import { Branch } from "./branch.model";
+import httpStatus from "http-status";
 
 // create Branch
 const createBranchintoDB = async (payload: TBranch) => {
+  // check this email is already used or not in another user collecton
+  const user = await AuthServices.currentUser(payload.email)
+  if(user){
+    throw new AppError(httpStatus.BAD_REQUEST, "This Email is Already Exist!" );
+  }
   const result = await Branch.create(payload);
   return result;
 };
