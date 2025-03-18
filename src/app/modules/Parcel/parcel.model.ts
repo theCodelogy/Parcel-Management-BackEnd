@@ -9,7 +9,8 @@ const paymentMethods = ["COD"];
 // Mongoose parcel Schema
 const ParcelSchema = new Schema<TParcel>({
   TrakingId: { type: String, unique: true, required: true },
-  merchant: { type: String, required: true },
+  merchantEmail: { type: String, required: true },
+  merchantName: { type: String, required: true },
   merchantAddress: { type: String, required: true },
   merchantPhone: { type: String, required: true },
   cashCollection: { type: Number, required: true },

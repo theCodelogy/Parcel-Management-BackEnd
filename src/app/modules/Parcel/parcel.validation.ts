@@ -2,7 +2,8 @@ import { z } from "zod";
 
 
 const CreateParcelValidation = z.object({
-  merchant: z.string(),
+  merchantName: z.string(),
+  merchantEmail: z.string(),
   merchantPhone: z.string(),
   merchantAddress: z.string(),
   cashCollection: z.number(),
@@ -30,7 +31,8 @@ const CreateParcelValidation = z.object({
 
 
 const UpdateParcelValidation = z.object({
-  merchant: z.string().optional(),
+  merchantName: z.string().optional(),
+  merchantEmail: z.string().optional(),
   merchantAddress: z.string().optional(),
   merchantPhone: z.string().optional(),
   cashCollection: z.number().optional(),
