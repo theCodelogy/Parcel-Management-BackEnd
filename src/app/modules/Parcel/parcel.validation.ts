@@ -3,9 +3,8 @@ import { z } from "zod";
 
 const CreateParcelValidation = z.object({
   merchant: z.string(),
-  pickupPoints: z.string(),
-  pickupPhone: z.string(),
-  pickupAddress: z.string(),
+  merchantPhone: z.string(),
+  merchantAddress: z.string(),
   cashCollection: z.number(),
   sellingPrice: z.number(),
   invoice: z.string(),
@@ -32,9 +31,8 @@ const CreateParcelValidation = z.object({
 
 const UpdateParcelValidation = z.object({
   merchant: z.string().optional(),
-  pickupPoints: z.string().optional(),
-  pickupPhone: z.string().optional(),
-  pickupAddress: z.string().optional(),
+  merchantAddress: z.string().optional(),
+  merchantPhone: z.string().optional(),
   cashCollection: z.number().optional(),
   sellingPrice: z.number().optional(),
   invoice: z.string().optional(),

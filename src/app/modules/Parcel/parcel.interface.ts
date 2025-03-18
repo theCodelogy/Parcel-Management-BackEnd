@@ -7,9 +7,8 @@ type PaymentMethod = "COD";
 export type TParcel = {
   TrakingId:string;
   merchant: string;
-  pickupPoints: string;
-  pickupPhone: string;
-  pickupAddress: string;
+  merchantPhone:string;
+  merchantAddress:string;
   cashCollection: number;
   sellingPrice: number;
   invoice: string;
