@@ -10,9 +10,8 @@ const paymentMethods = ["COD"];
 const ParcelSchema = new Schema<TParcel>({
   TrakingId: { type: String, unique: true, required: true },
   merchant: { type: String, required: true },
-  pickupPoints: { type: String, required: true },
-  pickupPhone: { type: String, required: true },
-  pickupAddress: { type: String, required: true },
+  merchantAddress: { type: String, required: true },
+  merchantPhone: { type: String, required: true },
   cashCollection: { type: Number, required: true },
   sellingPrice: { type: Number, required: true },
   invoice: { type: String, required: true },
