@@ -12,7 +12,6 @@ export type TParcel = {
   merchantAddress:string;
   cashCollection: number;
   sellingPrice: number;
-  invoice: string;
   deliveryType: DeliveryType;
   Weight: number;
   customerName: string;

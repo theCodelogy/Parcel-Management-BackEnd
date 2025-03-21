@@ -15,7 +15,6 @@ const ParcelSchema = new Schema<TParcel>({
   merchantPhone: { type: String, required: true },
   cashCollection: { type: Number, required: true },
   sellingPrice: { type: Number, required: true },
-  invoice: { type: String, required: true },
   deliveryType: { type: String, enum: deliveryTypes, required: true },
   Weight: { type: Number, required: true },
   customerName: { type: String, required: true },
