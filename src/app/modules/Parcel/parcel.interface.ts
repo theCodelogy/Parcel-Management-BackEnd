@@ -30,4 +30,5 @@ export type TParcel = {
   currentPayable: number;
   currentStatus: string;
   parcelStatus: object[];
+  branchname: string;
 };

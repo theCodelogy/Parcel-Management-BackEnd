@@ -24,6 +24,7 @@ const CreateParcelValidation = z.object({
   netPayable: z.number(),
   advance: z.number(),
   currentPayable: z.number(),
+  branchname: z.string(),
 });
 
 const UpdateParcelValidation = z.object({
@@ -53,6 +54,7 @@ const UpdateParcelValidation = z.object({
   advance: z.number().optional(),
   currentPayable: z.number().optional(),
   parcelStatus: z.array(z.object({})).optional(),
+  branchname: z.string().optional(),
 });
 
 export const ParcelValidation = {
