@@ -35,6 +35,7 @@ const ParcelSchema = new Schema<TParcel>(
     currentPayable: { type: Number, required: true },
     currentStatus: { type: String, default: "Parcel Create" },
     parcelStatus: { type: [Schema.Types.Mixed], required: true },
+    branchname: { type: String, required: true },
   },
   { timestamps: true }
 );
