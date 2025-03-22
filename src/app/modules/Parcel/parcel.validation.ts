@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-
 const CreateParcelValidation = z.object({
   merchantName: z.string(),
   merchantEmail: z.string(),
@@ -27,8 +26,6 @@ const CreateParcelValidation = z.object({
   currentPayable: z.number(),
 });
 
-
-
 const UpdateParcelValidation = z.object({
   merchantName: z.string().optional(),
   merchantEmail: z.string().optional(),
@@ -36,7 +33,9 @@ const UpdateParcelValidation = z.object({
   merchantPhone: z.string().optional(),
   cashCollection: z.number().optional(),
   sellingPrice: z.number().optional(),
-  deliveryType: z.enum(["Same Day", "Next Day", "Sub City", "Outside City"]).optional(),
+  deliveryType: z
+    .enum(["Same Day", "Next Day", "Sub City", "Outside City"])
+    .optional(),
   Weight: z.number().optional(),
   customerName: z.string().optional(),
   customerPhone: z.string().optional(),
@@ -53,12 +52,10 @@ const UpdateParcelValidation = z.object({
   netPayable: z.number().optional(),
   advance: z.number().optional(),
   currentPayable: z.number().optional(),
-  parcelStatus:z.array(z.object({})).optional(),
-})
+  parcelStatus: z.array(z.object({})).optional(),
+});
 
 export const ParcelValidation = {
   CreateParcelValidation,
-  UpdateParcelValidation
+  UpdateParcelValidation,
 };
-
-

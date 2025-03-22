@@ -15,7 +15,7 @@ const createSuperAdmin = catchAsync(async (req, res) => {
 });
 
 const getAllSuperAdmin = catchAsync(async (req, res) => {
-  const result = await SuperAdminServices.getAllSuperAdminFromDB();
+  const result = await SuperAdminServices.getAllSuperAdminFromDB(req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

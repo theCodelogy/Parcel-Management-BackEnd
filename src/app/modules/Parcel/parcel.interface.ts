@@ -1,15 +1,14 @@
-
 type DeliveryType = "Same Day" | "Next Day" | "Sub City" | "Outside City";
 type PackagingType = "Poly" | "Bubble Poly" | "Box" | "Box Poly";
 type PriorityType = "Normal" | "High";
 type PaymentMethod = "COD";
 
 export type TParcel = {
-  TrakingId:string;
+  TrakingId: string;
   merchantEmail: string;
   merchantName: string;
-  merchantPhone:string;
-  merchantAddress:string;
+  merchantPhone: string;
+  merchantAddress: string;
   cashCollection: number;
   sellingPrice: number;
   deliveryType: DeliveryType;
@@ -22,13 +21,13 @@ export type TParcel = {
   priority: PriorityType;
   paymentMethod: PaymentMethod;
   deliveryCharge: number;
-  liquidORFragile?:number;
+  liquidORFragile?: number;
   codCharge: number;
   totalCharge: number;
   vat: number;
   netPayable: number;
-  advance:number;
+  advance: number;
   currentPayable: number;
-  currentStatus:string;
-  parcelStatus:object[];
+  currentStatus: string;
+  parcelStatus: object[];
 };

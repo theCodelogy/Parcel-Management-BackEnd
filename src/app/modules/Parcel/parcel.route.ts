@@ -1,58 +1,50 @@
-import express from 'express';
-import validateRequest from '../../middlewares/validateRequest';
-import { ParcelValidation } from './parcel.validation';
-import { ParcelControllers } from './parcel.controller';
-import auth from '../../middlewares/auth';
-import { USER_ROLE } from '../auth/auth.constait';
-
-
-
-
+import express from "express";
+import validateRequest from "../../middlewares/validateRequest";
+import { ParcelValidation } from "./parcel.validation";
+import { ParcelControllers } from "./parcel.controller";
+import auth from "../../middlewares/auth";
+import { USER_ROLE } from "../auth/auth.constait";
 
 const router = express.Router();
 // create parcel
 router.post(
-  '/',
+  "/",
   // auth(USER_ROLE['Super Admin'],USER_ROLE.Merchant),
   validateRequest(ParcelValidation.CreateParcelValidation),
-  ParcelControllers.createParcel,
+  ParcelControllers.createParcel
 );
 
 // Get all parcel
 router.get(
-  '/',
+  "/",
   // auth("Super Admin","Delivery Man","Merchant"),
-  ParcelControllers.getAllParcels,
+  ParcelControllers.getAllParcels
 );
 
 // Get single parcel
-router.get(
-  '/:TrakingId',
-  ParcelControllers.getSingleParcel,
-);
+router.get("/:TrakingId", ParcelControllers.getSingleParcel);
 
 // Update parcel
 router.patch(
-  '/:id',
+  "/:id",
   // auth("Super Admin","Merchant"),
   validateRequest(ParcelValidation.UpdateParcelValidation),
-  ParcelControllers.updateleParcel,
+  ParcelControllers.updateleParcel
 );
 
 // Update parcel status
 router.put(
-  '/:id',
+  "/:id",
   // auth("Delivery Man","Super Admin"),
   validateRequest(ParcelValidation.UpdateParcelValidation),
-  ParcelControllers.updateleParcelStaus,
+  ParcelControllers.updateleParcelStaus
 );
 
 // Delete single parcel
 router.delete(
-  '/:id',
+  "/:id",
   // auth("Super Admin"),
-  ParcelControllers.deleteSingleParcel,
+  ParcelControllers.deleteSingleParcel
 );
-
 
 export const ParcelRoutes = router;

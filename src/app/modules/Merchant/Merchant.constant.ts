@@ -4,3 +4,5 @@ export const merchantSearchableFields = [
     'phone',
     'name',
   ];
+
+  
