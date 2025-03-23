@@ -5,7 +5,7 @@ export type TMerchant = {
   name: string;
   email: string;
   phone: string;
-  role:"Merchant"
+  role: "Merchant";
   openingBalance: number;
   password: string;
   vat: number;
@@ -20,23 +20,30 @@ export type TMerchant = {
   walletUseActivation: boolean;
   address: string;
   returnCharges: number;
-  codCharge: {
-    insideCity: number;
-    subCity: number;
-    outsideCity: number;
+  deliveryCharge: {
+    isDefault: boolean;
+    chargeList?: {
+      sameDay: number;
+      nextDay: number;
+      subCity: number;
+      outsideCity: number;
+    };
+    increasePerKG?: {
+      sameDay: number;
+      nextDay: number;
+      subCity: number;
+      outsideCity: number;
+    };
   };
   createdAt: Date;
-}
-
+};
 
 export interface MerchantModel extends Model<TMerchant> {
-
   //instance methods for checking if passwords are matched
   isPasswordMatched(
     plainTextPassword: string,
-    hashedPassword: string,
+    hashedPassword: string
   ): Promise<boolean>;
-   //instance methods for checking if the user exist
-  isMerchantExists(paylod:string): Promise<TMerchant>;
- 
+  //instance methods for checking if the user exist
+  isMerchantExists(paylod: string): Promise<TMerchant>;
 }

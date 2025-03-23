@@ -9,6 +9,7 @@ import { ToDoRoutes } from "../modules/ToDo/toDo.route";
 import { DeliveryCategoryRoutes } from "../modules/DeliveryCategory/deliveryCategory.route";
 import { DeliveryChargeRoutes } from "../modules/Delivery Charge/deliveryCharge.route";
 import { LiquidFragileRoutes } from "../modules/LiquidFragile/liquidFragile.route";
+import { PackagingRoutes } from "../modules/Packaging/Packaging.route";
 
 const router = Router(); // Create a new Router instance
 
@@ -24,6 +25,7 @@ const moduleRoutes = [
   { path: "/deliveryCategory", route:DeliveryCategoryRoutes },
   { path: "/deliveryCharge", route:DeliveryChargeRoutes },
   { path: "/liquidFragile", route:LiquidFragileRoutes },
+  { path: "/packaging", route:PackagingRoutes },
 
 ];
 

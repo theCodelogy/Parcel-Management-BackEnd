@@ -5,13 +5,47 @@ import config from "../../config";
 
 
 // Define Mongoose Schema
+// const MerchantSchema = new Schema<TMerchant>(
+//   {
+//     businessName: { type: String, required: true },
+//     name: { type: String, required: true },
+//     email: { type: String, required: true, unique: true },
+//     phone: { type: String, required: true, unique: true },
+//     role: { type: String, required: true},
+//     openingBalance: { type: Number, required: true },
+//     password: { type: String, required: true },
+//     vat: { type: Number, required: true },
+//     hub: { type: String, required: true },
+//     nid: { type: String, required: true },
+//     status: {
+//       type: String,
+//       enum: ["Pending", "Active", "Disabled"],
+//       default:"Pending",
+//     },
+//     tradeLicense: { type: String, required: true },
+//     image: { type: String },
+//     referenceName: { type: String, required: true },
+//     referencePhone: { type: String, required: true },
+//     paymentPeriod: { type: Number, required: true },
+//     walletUseActivation: { type: Boolean, default: false },
+//     address: { type: String, required: true },
+//     returnCharges: { type: Number, required: true },
+//     codCharge: {
+//       insideCity: { type: Number, required: true },
+//       subCity: { type: Number, required: true },
+//       outsideCity: { type: Number, required: true },
+//     },
+//   },
+//   { timestamps: true }
+// );
+
 const MerchantSchema = new Schema<TMerchant>(
   {
     businessName: { type: String, required: true },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     phone: { type: String, required: true, unique: true },
-    role: { type: String, required: true},
+    role: { type: String, required: true, enum: ["Merchant"] },
     openingBalance: { type: Number, required: true },
     password: { type: String, required: true },
     vat: { type: Number, required: true },
@@ -20,7 +54,7 @@ const MerchantSchema = new Schema<TMerchant>(
     status: {
       type: String,
       enum: ["Pending", "Active", "Disabled"],
-      default:"Pending",
+      default: "Pending",
     },
     tradeLicense: { type: String, required: true },
     image: { type: String },
@@ -30,10 +64,20 @@ const MerchantSchema = new Schema<TMerchant>(
     walletUseActivation: { type: Boolean, default: false },
     address: { type: String, required: true },
     returnCharges: { type: Number, required: true },
-    codCharge: {
-      insideCity: { type: Number, required: true },
-      subCity: { type: Number, required: true },
-      outsideCity: { type: Number, required: true },
+    deliveryCharge: {
+      isDefault: { type: Boolean, required: true },
+      chargeList: {
+        sameDay: { type: Number },
+        nextDay: { type: Number },
+        subCity: { type: Number },
+        outsideCity: { type: Number },
+      },
+      increasePerKG: {
+        sameDay: { type: Number },
+        nextDay: { type: Number },
+        subCity: { type: Number },
+        outsideCity: { type: Number },
+      },
     },
   },
   { timestamps: true }

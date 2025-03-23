@@ -8,6 +8,7 @@ import { Merchant } from "../Merchant/Merchant.model";
 import { DeliveryMan } from "../Delivery Man/deliveryMan.model";
 import { Branch } from "../Branch/branch.model";
 
+
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
   let user;
@@ -17,7 +18,6 @@ const loginUser = async (payload: TLoginUser) => {
     payload.emailORphone
   );
   const branch = await Branch.isBranchExists(payload.emailORphone);
-
   // Check is password valid or not
   if (superAdmin) {
     //checking if the password is correct
